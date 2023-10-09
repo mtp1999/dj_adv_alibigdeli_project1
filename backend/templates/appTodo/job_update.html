@@ -1,0 +1,21 @@
+{% extends 'appBlog/_base.html' %}
+
+{% block form_class %}
+    d-none
+{% endblock %}
+
+{% block content %}
+    <div class="container text-center">
+
+        <form method="post" action="" class="my-5">
+            {% csrf_token %}
+            <h2>Update your job:</h2>
+              {{ form }}
+{#             <input type="text" name="name" maxlength="100" required id="id_name">#}
+
+            <input type="submit" class="btn btn-primary" value="submit">
+        </form>
+
+    </div>
+
+{% endblock %}

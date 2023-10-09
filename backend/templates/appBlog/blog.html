@@ -1,0 +1,144 @@
+{% extends 'appBlog/_base.html' %}
+{% load static %}
+{% load tags %}
+{% load humanize %}
+
+{% block title %}
+    blog
+{% endblock %}
+
+{% block blog_active %}active{% endblock %}
+{% block home_active %}{% endblock %}
+
+{% block content %}
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="{% url 'appBlog:home' %}">Home</a></li>
+          <li>Blog</li>
+        </ol>
+        <h2>Blog</h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+
+          <div class="col-lg-8 entries">
+
+            <!-- posts -->
+              {% if posts %}
+                  {% for post in posts %}
+            <article class="entry">
+
+              <div class="entry-img">
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <a href="{% url 'appBlog:single' post.id %}">{{ post.title }}</a>
+              </h2>
+
+              <div class="entry-meta">
+                <ul>
+                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="{% url 'appBlog:single' post.id %}">{{ post.author }}</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="{% url 'appBlog:single' post.id %}"><time datetime="2020-01-01">{{ post.published_date|naturalday }}</time></a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="{% url 'appBlog:single' post.id %}">{% counting_post_comments post.id %} Comments</a></li>
+                </ul>
+              </div>
+
+              <div class="entry-content">
+                <p>
+                    {{ post.content|truncatewords:30| safe }}
+                </p>
+                <div class="read-more">
+                  <a href="{% url 'appBlog:single' post.id %}">Read More</a>
+                </div>
+              </div>
+
+            </article><!-- End blog entry -->
+                  {% endfor %}
+              {% endif %}
+
+            <!-- pagination -->
+          {% if posts %}
+            <div class="blog-pagination">
+              <ul class="justify-content-center">
+
+                    <!-- previous -->
+                  {% if posts.has_previous %}
+                        <li class="page-item">
+                            <a href="?page={{ posts.previous_page_number }}" class="page-link" aria-label="Previous">
+                                <span aria-hidden="true">
+                                    <span class="lnr lnr-chevron-left"><</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a href="?page={{ posts.previous_page_number }}" class="page-link">{{ posts.previous_page_number }}</a></li>
+                  {% endif %}
+
+                <!-- current -->
+                <li class="active"><a href="#">{{ posts.number }}</a></li>
+
+                <!-- next -->
+                {% if posts.has_next %}
+                <li class="page-item"><a href="?page={{ posts.next_page_number }}" class="page-link">{{ posts.next_page_number }}</a></li>
+                <li class="page-item">
+                    <a href="?page={{ posts.next_page_number }}" class="page-link" aria-label="Next">
+                        <span aria-hidden="true">
+                            <span class="lnr lnr-chevron-right">></span>
+                        </span>
+                    </a>
+                </li>
+                {% endif %}
+
+              </ul>
+            </div>
+          {% endif %}
+            <!-- pagination end -->
+
+          </div><!-- End blog entries list -->
+
+          <div class="col-lg-4">
+
+            <div class="sidebar">
+
+              <h3 class="sidebar-title">Search</h3>
+              <div class="sidebar-item search-form">
+                <form action="" method="get">
+                  <input type="text" name="search">
+                  <button type="submit"><i class="bi bi-search"></i></button>
+                </form>
+              </div><!-- End sidebar search formn-->
+
+                <!-- categories -->
+                {% category_section %}
+
+                <!-- authors -->
+                {% author_section %}
+
+                <!-- latest posts -->
+                {% latest_posts %}
+
+                <!-- tags -->
+                {% tag_section %}
+
+            </div><!-- End sidebar -->
+
+          </div><!-- End blog sidebar -->
+
+        </div>
+
+      </div>
+    </section><!-- End Blog Section -->
+
+  </main><!-- End #main -->
+{% endblock %}

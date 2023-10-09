@@ -1,0 +1,31 @@
+<!-- Modal -->
+{% if messages %}
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    {% for m in messages %}
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-body {{ m.tags }}">
+          <p>{{ m }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    {% endfor %}
+
+    </div>
+  </div>
+
+
+    <script>
+                var myModal = new bootstrap.Modal(document.getElementById('myModal'), {})
+                myModal.toggle()
+    </script>
+{#{% endif %}#}
+{##}
+{##}
+{##}
+{#{% if messages %}#}
+
+{% endif %}

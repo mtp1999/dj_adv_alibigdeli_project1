@@ -1,0 +1,33 @@
+{% extends 'appAccount/_base.html' %}
+
+
+{% block title %}
+    Login Page
+{% endblock %}
+
+{% block form_elements %}
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+
+    <label for="email" class="sr-only">email</label>
+    <input type="text" id="email" name="email" class="form-control" placeholder="email" required autofocus>
+
+
+    <label for="password" class="sr-only">Password</label>
+    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+    <a href="{% url 'password_reset' %}">forgot password?</a>
+    <div class="checkbox mb-3">
+    <label>
+      <input type="checkbox" value="remember-me"> Remember me
+    </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <br>
+    <br>
+    <h3 class="h3 mb-3 font-weight-normal"><a href="{% url 'appAccount:signup' %}">Sign up</a></h3>
+    <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
+    <br>
+    <br>
+    <br>
+    <br>
+{% endblock %}
+

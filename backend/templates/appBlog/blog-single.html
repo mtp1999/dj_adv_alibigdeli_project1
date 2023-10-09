@@ -1,0 +1,214 @@
+{% extends 'appBlog/_base.html' %}
+{% load static %}
+{% load humanize %}
+{% load tags %}
+
+
+{% block title %}
+    {{ post.title }}
+{% endblock %}
+
+{% block home_active %}
+{% endblock %}
+
+{% block content %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="{% url 'appBlog:home' %}">Home</a></li>
+          <li><a href="{% url 'appBlog:blog' %}">Blog</a></li>
+          <li>Blog Single</li>
+        </ol>
+        <h2>Blog Single</h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Single Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+
+          <div class="col-lg-8 entries">
+
+            <article class="entry entry-single">
+
+              <div class="entry-img">
+                <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <a href="blog-single.html">{{ post.title }}</a>
+              </h2>
+
+              <div class="entry-meta">
+                <ul>
+                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">{{ post.author }}</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">{{ post.published_date|naturalday }}</time></a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="#comments">{% counting_post_comments post.id %} comments</a></li>
+                </ul>
+              </div>
+
+              <div class="entry-content">
+                <p>
+                  Similique neque nam consequuntur ad non maxime aliquam quas. Quibusdam animi praesentium. Aliquam et laboriosam eius aut nostrum quidem aliquid dicta.
+                  Et eveniet enim. Qui velit est ea dolorem doloremque deleniti aperiam unde soluta. Est cum et quod quos aut ut et sit sunt. Voluptate porro consequatur assumenda perferendis dolore.
+                </p>
+
+              </div>
+
+              <div class="entry-footer">
+                <i class="bi bi-tags"></i>
+                <ul class="tags">
+                    {% for tag in post.tags.all %}
+                        <li><a href="{% url 'appBlog:blog_tag' tag.name %}">{{ tag.name }}</a></li>
+                    {% endfor %}
+                </ul>
+              </div>
+            <div class="entry-footer">
+                views: {{ post.views }}
+              </div>
+
+            </article><!-- End blog entry -->
+
+            <div class="blog-author d-flex align-items-center">
+              <img src="{% static 'assets/img/blog/blog-author.jpg' %}" class="rounded-circle float-left" alt="blog-author">
+              <div>
+                <h4>Jane Smith</h4>
+                <div class="social-links">
+                  <a href="https://twitters.com/#"><i class="bi bi-twitter"></i></a>
+                  <a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
+                  <a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
+                </div>
+                <p>
+                  Itaque quidem optio quia voluptatibus dolorem dolor. Modi eum sed possimus accusantium. Quas repellat voluptatem officia numquam sint aspernatur voluptas. Esse et accusantium ut unde voluptas.
+                </p>
+              </div>
+            </div><!-- End blog author bio -->
+
+              <!-- comments -->
+            <div class="blog-comments" id="comments">
+
+              <h4 class="comments-count">{% counting_post_comments post.id %} Comments</h4>
+
+            {% if comments %}
+                {% for comment in comments %}
+              <div class="comment">
+                <div class="d-flex">
+                  <div>
+                    <h4>{{ comment.name }}<a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h4>
+                    <h4>{{ comment.subject }}</h4>
+                    <time datetime="2020-01-01">{{ comment.created_date|naturalday }}</time>
+                    <p>{{ comment.message }}</p>
+                  </div>
+                </div>
+              </div><!-- End comment #1 -->
+                {% endfor %}
+            {% endif %}
+
+              <div class="reply-form">
+                <h4>Leave a Reply</h4>
+                <p>Your email address will not be published. Required fields are marked * </p>
+                <form action="" method="post">
+                    {% csrf_token %}
+
+                    <input name="post" type="hidden"  value="{{ post.id }}">
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <input name="name" type="text" class="form-control" placeholder="Your Name*">
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <input name="email" type="text" class="form-control" placeholder="Your Email*">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col form-group">
+                      <input name="subject" type="text" class="form-control" placeholder="subject">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col form-group">
+                      <textarea name="message" class="form-control" placeholder="Your Comment*"></textarea>
+                    </div>
+                  </div>
+                    <div class="pb-3">
+                            {{ form.captcha }}
+                    </div>
+                  <button type="submit" class="btn btn-primary">Post Comment</button>
+
+                </form>
+
+              </div>
+
+            </div>
+              <!-- End blog comments -->
+
+          </div><!-- End blog entries list -->
+
+            <!-- sidebar -->
+          <div class="col-lg-4">
+
+            <div class="sidebar">
+
+
+                <!-- categories -->
+                {% category_section %}
+
+                <!-- latest posts -->
+                {% latest_posts %}
+
+                <!-- tags -->
+                {% tag_section %}
+
+
+            </div><!-- End sidebar -->
+
+          </div>
+            <!-- End blog sidebar -->
+
+
+        <div class="navigation-area" style="text-align: center; border: 1px solid black; border-radius: 1rem">
+                        {% if previous_post %}
+                        <!-- previous post -->
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-center align-items-center">
+
+                                <div class="arrow">
+                                    <a href="{% url 'appBlog:single' previous_post.id %}"><span class="lnr text-white lnr-arrow-left"></span></a>
+                                </div>
+                                <div class="detials">
+                                    <p>Prev Post</p>
+                                    <a href="{% url 'appBlog:single' previous_post.id %}"><h4>{{ previous_post.title }}</h4></a>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {% if next_post %}
+                        <!-- next post -->
+                            <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-center align-items-center">
+                                <div class="detials">
+                                    <p>Next Post</p>
+                                    <a href="{% url 'appBlog:single' next_post.id %}"><h4>{{ next_post.title }}</h4></a>
+                                </div>
+                                <div class="arrow">
+                                    <a href="{% url 'appBlog:single' next_post.id %}"><span class="lnr text-white lnr-arrow-right"></span></a>
+                                </div>
+
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Blog Single Section -->
+
+  </main><!-- End #main -->
+{% endblock %}

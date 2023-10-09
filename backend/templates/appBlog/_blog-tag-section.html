@@ -1,0 +1,9 @@
+<h3 class="sidebar-title">Tags</h3>
+<div class="sidebar-item tags">
+<ul>
+        {% for tag in tags %}
+            <a href="{% url 'appBlog:blog_tag' tag %}"><li>{{ tag }}</li></a>
+        {% endfor %}
+
+</ul>
+</div>

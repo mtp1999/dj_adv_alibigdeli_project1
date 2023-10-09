@@ -1,0 +1,59 @@
+{% extends 'appBlog/_base.html' %}
+
+{% block form_class %}
+    d-none
+{% endblock %}
+
+{% block content %}
+    <div class="container text-center">
+
+        <form method="post" action="" class="my-5">
+            {% csrf_token %}
+            <label>Enter your job:</label>
+              <select name="user" required id="id_user" hidden="hidden">
+                <option value="{{ request.user.profile.pk }}"></option>
+            </select>
+
+             <input type="text" name="name" maxlength="100" required id="id_name">
+            <select name="status" id="id_status">
+                <option value="done">Done</option>
+                <option value="undone">Undone</option>
+            </select>
+
+            <input type="submit" class="btn btn-primary" value="submit">
+        </form>
+
+        {% if jobs %}
+    <table class="table my-5">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Job</th>
+          <th scope="col">Status</th>
+          <th scope="col">Created Date</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+            {% for job in jobs %}
+        <tr>
+          <td><a href="{% url 'appTodo:update_job' job.pk %}">{{ job.name }}</a></td>
+            {% if job.status == 'done' %}
+                <td class="text-success">{{ job.status }}</td>
+            {% else %}
+                <td class="text-danger">{{ job.status }}</td>
+            {% endif %}
+          <td>{{ job.created_date }}</td>
+          <td>
+              <form method="POST" action="{% url "appTodo:delete_job" job.pk %}">
+                {% csrf_token %}<input type="submit" value="X" class="btn btn-danger text-white">
+            </form>
+
+          </td>
+        </tr>
+            {% endfor %}
+      </tbody>
+</table>
+        {% endif %}
+    </div>
+
+{% endblock %}
