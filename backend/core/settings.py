@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'compressor',
     'appBlog',
     'appTodo',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

@@ -1,8 +1,9 @@
-from django.urls import path
+from django.urls import path, include
 from appBlog import views
 from django.conf import settings
 from django.conf.urls.static import static
 from appBlog.feeds import LatestEntriesFeed
+
 app_name = 'appBlog'
 
 urlpatterns = [
@@ -18,6 +19,7 @@ urlpatterns = [
 
     path('about/', views.AboutView.as_view(), name='about'),
     path('rss/feed/', LatestEntriesFeed()),
+    path('blog/api/v1/', include('appBlog.api.v1.urls')),
 ]
 
 if settings.DEBUG:
