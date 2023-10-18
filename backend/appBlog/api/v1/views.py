@@ -1,38 +1,47 @@
 from django.shortcuts import get_object_or_404
-from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from appBlog.models import Post
-from .serializers import PostSerializers
+from .serializers import PostSerializer
 
 
-@api_view(["GET", "PUT", "DELETE"])
-@permission_classes([IsAuthenticated, ])
-def post_detail(request, id):
-    post = get_object_or_404(Post, pk=id)
-    if request.method == "GET":
-        serializer = PostSerializers(post)
+class PostList(APIView):
+    serializer_class = PostSerializer
+
+    def get(self, request):
+        posts = Post.objects.filter(status=True)
+        serializer = self.serializer_class(posts, many=True)
         return Response(serializer.data)
-    elif request.method == "PUT":
-        serializer = PostSerializers(post, data=request.data)
+
+    def post(self, request):
+        serializer = self.serializer_class(data=self.request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
-    elif request.method == "DELETE":
+
+
+class PostDetail(APIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = PostSerializer
+
+    def get(self, request, id):
+        post = get_object_or_404(Post, pk=id)
+        serializer = self.serializer_class(post)
+        return Response(serializer.data)
+
+    def put(self, request, id):
+        post = get_object_or_404(Post, pk=id)
+        serializer = PostSerializer(post, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+    def delete(self, request):
+        post = get_object_or_404(Post, pk=self.request.get('id'))
         post.delete()
         return Response({'Detail': 'Post Deleted.'})
 
 
-@api_view(["GET", "POST"])
-def post_list(request):
-    if request.method == "GET":
-        posts = Post.objects.filter(status=True)
-        serializer = PostSerializers(posts, many=True)
-        return Response(serializer.data)
-    elif request.method == "POST":
-        serializer = PostSerializers(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)
 
 
