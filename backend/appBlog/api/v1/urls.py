@@ -7,7 +7,7 @@ app_name = 'appBlog-api-v1'
 
 urlpatterns = [
     path('posts/', views.PostList.as_view(), name='post_list'),
-    path('posts/<int:id>/', views.PostDetail.as_view(), name='post_detail'),
+    path('posts/<int:pk>/', views.PostDetail.as_view(), name='post_detail'),
     # path('blog/category/<str:category>/', views.BlogView.as_view(), name='blog_category'),
     # path('blog/tag/<str:tag>/', views.BlogView.as_view(), name='blog_tag'),
     # path('blog/author/<str:author>/', views.BlogView.as_view(), name='blog_author'),
