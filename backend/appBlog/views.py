@@ -14,7 +14,7 @@ class HomeView(TemplateView):
 
 class BlogView(View):
     def get(self, request, **kwargs):
-        posts = Post.objects.filter(published_date__lte=timezone.now(), status=1).order_by('-published_date')
+        posts = Post.objects.filter(status=1).order_by('-published_date')
         if s := request.GET.get('search'):
             posts = posts.filter(title__contains=s)
         if a := kwargs.get('author'):

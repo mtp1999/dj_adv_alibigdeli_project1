@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
 
-app_name = 'appBlog-api-v1'
+app_name = 'api-v1'
 
 # urlpatterns = [
 #     path('posts/', views.PostList.as_view(), name='post_list'),

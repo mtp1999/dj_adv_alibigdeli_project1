@@ -55,7 +55,10 @@ INSTALLED_APPS = [
     'appBlog',
     'appTodo',
     'rest_framework',
+    'django_filters',
+
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -205,3 +208,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 COMPRESS_ROOT = BASE_DIR / 'compress_static'
 COMPRESS_ENABLED = True
+

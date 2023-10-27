@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.urls import reverse
 from taggit.managers import TaggableManager
+from appAccount.models import Profile
 
 
 class Post(models.Model):
@@ -9,7 +10,7 @@ class Post(models.Model):
         db_table = 'appBlog_post'
     title = models.CharField(max_length=50)
     content = models.TextField()
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    author = models.ForeignKey(Profile, on_delete=models.CASCADE)
     published_date = models.DateTimeField()
     status = models.BooleanField(default=False)
     views = models.IntegerField(default=0)
@@ -20,8 +21,14 @@ class Post(models.Model):
     def __str__(self):
         return str(self.id) + '-' + self.title
 
+    def get_snippet(self):
+        return self.content[0:10]
+
     def get_absolute_url(self):
         return reverse('appBlog:single', kwargs={'pid': self.id})
+
+    def get_absolute_api_url(self):
+        return reverse('appBlog:api-v1:posts-detail', kwargs={'pk': self.pk})
 
 
 class Category(models.Model):
