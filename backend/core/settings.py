@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'appTodo',
     'rest_framework',
     'django_filters',
+    'drf_yasg',
 
 ]
 
