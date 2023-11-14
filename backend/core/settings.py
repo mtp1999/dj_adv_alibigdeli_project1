@@ -55,8 +55,13 @@ INSTALLED_APPS = [
     'appBlog',
     'appTodo',
     'rest_framework',
+    'rest_framework.authtoken',
+
     'django_filters',
     'drf_yasg',
+    'rest_framework_simplejwt',
+    'djoser',
+    'mail_templated',
 
 ]
 
@@ -202,11 +207,27 @@ INTERNAL_IPS = [
 # sites
 SITE_ID = 3
 
-# using this in development mode
-# we use smtp service in production mode
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 COMPRESS_ROOT = BASE_DIR / 'compress_static'
 COMPRESS_ENABLED = True
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+
+    ]
+}
+
+
+# email configuration
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_USE_TLS = False
+EMAIL_HOST = 'smtp4dev'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''

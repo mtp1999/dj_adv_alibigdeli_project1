@@ -42,6 +42,7 @@ sitemaps = {
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('appAccount.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('', include('appBlog.urls')),
     path(
         "sitemap.xml",
@@ -53,7 +54,6 @@ urlpatterns = [
     path("__debug__/", include("debug_toolbar.urls")),
     path('summernote/', include('django_summernote.urls')),
     path('captcha/', include('captcha.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
     path('todo/', include('appTodo.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('swagger/output.json/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
