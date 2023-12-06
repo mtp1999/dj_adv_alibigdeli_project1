@@ -4,15 +4,18 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('appTodo', '0002_job_status'),
+        ("appTodo", "0002_job_status"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='job',
-            name='status',
-            field=models.CharField(choices=[('done', 'done'), ('undone', 'undone')], default='undone', max_length=6),
+            model_name="job",
+            name="status",
+            field=models.CharField(
+                choices=[("done", "done"), ("undone", "undone")],
+                default="undone",
+                max_length=6,
+            ),
         ),
     ]

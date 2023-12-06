@@ -4,27 +4,36 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('appBlog', '0007_alter_post_author'),
+        ("appBlog", "0007_alter_post_author"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Category',
+            name="Category",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
             ],
             options={
-                'verbose_name': 'category',
-                'verbose_name_plural': 'categories',
-                'db_table': 'appBlog_category',
+                "verbose_name": "category",
+                "verbose_name_plural": "categories",
+                "db_table": "appBlog_category",
             },
         ),
         migrations.AddField(
-            model_name='post',
-            name='categories',
-            field=models.ManyToManyField(db_table='appBlog_post_category', null=True, to='appBlog.category'),
+            model_name="post",
+            name="categories",
+            field=models.ManyToManyField(
+                db_table="appBlog_post_category", null=True, to="appBlog.category"
+            ),
         ),
     ]

@@ -5,4 +5,4 @@ from appTodo.models import Job
 class JobForm(forms.ModelForm):
     class Meta:
         model = Job
-        fields = ['user', 'name', 'status']
+        fields = ["user", "name", "status"]

@@ -8,4 +8,3 @@ class SendEmailThread(threading.Thread):
 
     def run(self):
         self.email_object.send()
-

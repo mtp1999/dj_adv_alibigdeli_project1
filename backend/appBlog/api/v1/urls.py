@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
 
-app_name = 'api-v1'
+app_name = "api-v1"
 
 # urlpatterns = [
 #     path('posts/', views.PostList.as_view(), name='post_list'),
@@ -25,5 +25,5 @@ app_name = 'api-v1'
 #     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 router = routers.DefaultRouter()
-router.register(r'posts', views.PostViewSet, basename='posts')
+router.register(r"posts", views.PostViewSet, basename="posts")
 urlpatterns = router.urls

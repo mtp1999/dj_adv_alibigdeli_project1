@@ -6,6 +6,6 @@ class JobListFilter(django_filters.FilterSet):
     class Meta:
         model = Job
         fields = {
-            'user': ['exact'],
-            'status': ['exact'],
+            "user": ["exact"],
+            "status": ["exact"],
         }

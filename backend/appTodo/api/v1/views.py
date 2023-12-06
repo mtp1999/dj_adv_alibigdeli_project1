@@ -13,12 +13,12 @@ class JobViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     serializer_class = JobSerializer
     queryset = Job.objects.all()
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filter_backends = [
+        DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter,
+    ]
     filterset_class = JobListFilter
-    search_fields = ['name']
-    ordering_fields = ['created_date']
+    search_fields = ["name"]
+    ordering_fields = ["created_date"]
     pagination_class = JobListPagination
-
-
-
-
