@@ -1,8 +1,8 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import TemplateView, FormView
 from appBlog.models import Post, Comment
-from django.utils import timezone
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from appBlog.forms import ContactForm, CommentForm
 from django.contrib import messages
@@ -37,7 +37,7 @@ class BlogView(View):
         return render(request, "appBlog/blog.html", context)
 
 
-class SingleView(View):
+class SingleView(LoginRequiredMixin, View):
     def get(self, request, pid):
         form = CommentForm()
         post_id_list = [

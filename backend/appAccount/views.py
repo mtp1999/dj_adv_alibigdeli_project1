@@ -18,6 +18,8 @@ class LogInView(LoginView):
         if user is not None:
             login(request, user)
             messages.success(request, "Login Successfully")
+            if self.request.GET.get('next'):
+                return redirect(self.request.GET.get('next'))
             return redirect("appBlog:home")
         else:
             messages.error(request, "Wrong Information")
