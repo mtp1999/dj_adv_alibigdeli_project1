@@ -15,7 +15,9 @@ class Post(models.Model):
     status = models.BooleanField(default=False)
     views = models.IntegerField(default=0)
     image = models.ImageField(upload_to="appBlog/posts/images/", default="default.jpg")
-    categories = models.ManyToManyField("Category", db_table="appBlog_post_category", blank=True)
+    categories = models.ManyToManyField(
+        "Category", db_table="appBlog_post_category", blank=True
+    )
     tags = TaggableManager()
 
     def __str__(self):

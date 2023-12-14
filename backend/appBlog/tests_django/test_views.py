@@ -1,6 +1,5 @@
 from django.test import TestCase, Client
-from django.urls import reverse, resolve
-from appBlog import views
+from django.urls import reverse
 from appAccount.models import User
 from appBlog.models import Post
 from datetime import datetime
@@ -9,7 +8,7 @@ from datetime import datetime
 class TestView(TestCase):
     def setUp(self):
         self.client = Client()
-        self.user = User.objects.create_user('admin.admin@gmail.com', 'a123456d')
+        self.user = User.objects.create_user("admin.admin@gmail.com", "a123456d")
         self.post = Post.objects.create(
             title="post title",
             content="post content",

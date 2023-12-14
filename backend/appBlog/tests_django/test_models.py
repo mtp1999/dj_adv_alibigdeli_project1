@@ -5,12 +5,10 @@ from appAccount.models import User
 
 
 class TestModel(TestCase):
-
     def setUp(self):
-        self.user = User.objects.create_user('admin.admin@gmail.com', 'a123456d')
+        self.user = User.objects.create_user("admin.admin@gmail.com", "a123456d")
 
     def test_post_create_with_valid_data(self):
-
         post = Post.objects.create(
             title="post title",
             content="post content",

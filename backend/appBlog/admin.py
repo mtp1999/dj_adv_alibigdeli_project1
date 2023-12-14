@@ -3,19 +3,19 @@ from appBlog.models import Post, Category, Contact, Comment
 from django_summernote.admin import SummernoteModelAdmin
 
 
-class PostAdmin(SummernoteModelAdmin):
+class SummernoteAdmin(SummernoteModelAdmin):
     summernote_fields = ("content",)
 
 
 @admin.register(Post)
-class ContactAdmin(admin.ModelAdmin):
+class PostAdmin(admin.ModelAdmin):
     list_display = ["id", "title", "author", "published_date", "status"]
     list_filter = ["author", "status"]
     list_display_links = ["id", "title"]
 
 
 @admin.register(Category)
-class ContactAdmin(admin.ModelAdmin):
+class CategoryAdmin(admin.ModelAdmin):
     list_display = ["id", "name"]
     list_display_links = ["id", "name"]
 
@@ -28,7 +28,7 @@ class ContactAdmin(admin.ModelAdmin):
 
 
 @admin.register(Comment)
-class ContactAdmin(admin.ModelAdmin):
+class CommentAdmin(admin.ModelAdmin):
     list_display = [
         "id",
         "name",

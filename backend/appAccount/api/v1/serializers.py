@@ -3,7 +3,7 @@ from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from appAccount.models import User, Profile
 from rest_framework.validators import ValidationError
-from django.contrib.auth import authenticate, password_validation
+from django.contrib.auth import authenticate
 from django.utils.translation import gettext_lazy as _
 from typing import Any, Dict
 

@@ -1,5 +1,5 @@
 from django.contrib.auth.views import LoginView
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.views import View
@@ -18,8 +18,8 @@ class LogInView(LoginView):
         if user is not None:
             login(request, user)
             messages.success(request, "Login Successfully")
-            if self.request.GET.get('next'):
-                return redirect(self.request.GET.get('next'))
+            if self.request.GET.get("next"):
+                return redirect(self.request.GET.get("next"))
             return redirect("appBlog:home")
         else:
             messages.error(request, "Wrong Information")
