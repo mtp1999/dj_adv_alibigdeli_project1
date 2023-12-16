@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('appBlog', '0013_comment'),
+        ("appBlog", "0013_comment"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='comment',
-            name='allowed',
+            model_name="comment",
+            name="allowed",
             field=models.BooleanField(default=False),
         ),
     ]

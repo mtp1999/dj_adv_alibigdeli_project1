@@ -13,13 +13,13 @@ class PostViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     serializer_class = PostSerializer
     queryset = Post.objects.filter(status=True)
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filter_backends = [
+        DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter,
+    ]
     # filterset_fields = ['categories', 'author']
     filterset_class = PostListFilter
-    search_fields = ['title', 'categories__name']
-    ordering_fields = ['published_date']
+    search_fields = ["title", "categories__name"]
+    ordering_fields = ["published_date"]
     pagination_class = PostListPagination
-
-
-
-

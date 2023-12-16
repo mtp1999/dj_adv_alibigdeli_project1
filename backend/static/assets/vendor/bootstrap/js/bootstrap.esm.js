@@ -1337,7 +1337,7 @@ class Carousel extends BaseComponent {
     }
     if (!activeElement || !nextElement) {
       // Some weirdness is happening, so we bail
-      // TODO: change tests that use empty divs to avoid this check
+      // TODO: change tests_django that use empty divs to avoid this check
       return;
     }
     const isCycling = Boolean(this._interval);

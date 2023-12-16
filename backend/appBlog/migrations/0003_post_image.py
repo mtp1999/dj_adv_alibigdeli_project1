@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('appBlog', '0002_post_status'),
+        ("appBlog", "0002_post_status"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='post',
-            name='image',
-            field=models.ImageField(default='asus1.png', upload_to=''),
+            model_name="post",
+            name="image",
+            field=models.ImageField(default="asus1.png", upload_to=""),
         ),
     ]
