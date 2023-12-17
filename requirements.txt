@@ -27,6 +27,7 @@ djangorestframework-simplejwt==5.3.0
 djoser==2.2.2
 drf-yasg==1.21.7
 exceptiongroup==1.2.0
+Faker==21.0.0
 flake8==6.1.0
 idna==3.6
 importlib-metadata==6.8.0
@@ -49,6 +50,7 @@ pyflakes==3.1.0
 PyJWT==2.8.0
 pytest==7.4.3
 pytest-django==4.7.0
+python-dateutil==2.8.2
 python-decouple==3.8
 python3-openid==3.2.0
 pytz==2023.3.post1

@@ -16,7 +16,7 @@ class Job(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return str(self.pk) + " ::: " + str(self.user) + " ::: " + str(self.name)
+        return str(self.pk) + ":" + str(self.name)
 
     def return_email(self):
         return self.user.user.email
