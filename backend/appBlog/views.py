@@ -97,3 +97,7 @@ class ContactView(FormView):
 
 class AboutView(TemplateView):
     template_name = "appBlog/about.html"
+
+
+class PostList(TemplateView):
+    template_name = "appBlog/get_post_list_from_api.html"

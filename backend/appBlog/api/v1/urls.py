@@ -1,4 +1,6 @@
 # from django.urls import path
+from django.urls import path
+
 from . import views
 
 # from django.conf import settings
@@ -25,6 +27,10 @@ app_name = "api-v1"
 #     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 #     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+urlpatterns = [
+    path('post_list_render_template/', views.PostListRenderTemplate.as_view(), name='post_list'),
+]
+
 router = routers.DefaultRouter()
 router.register(r"posts", views.PostViewSet, basename="posts")
-urlpatterns = router.urls
+urlpatterns += router.urls

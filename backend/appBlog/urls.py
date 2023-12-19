@@ -20,6 +20,7 @@ urlpatterns = [
     path("about/", views.AboutView.as_view(), name="about"),
     path("rss/feed/", LatestEntriesFeed()),
     path("blog/api/v1/", include("appBlog.api.v1.urls")),
+    path("blog/get_post_list_from_api", views.PostList.as_view()),
 ]
 
 if settings.DEBUG:
