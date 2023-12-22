@@ -3,7 +3,6 @@ from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.core.paginator import Paginator
-
 from appBlog.models import Post
 from .serializers import PostSerializer
 from rest_framework import viewsets
