@@ -10,6 +10,8 @@ urlpatterns = [
     path("jobs/delete/<int:pk>/", views.JobDeleteView.as_view(), name="delete_job"),
     path("jobs/update/<int:pk>/", views.JobUpdateView.as_view(), name="update_job"),
     path("api/v1/", include("appTodo.api.v1.urls")),
+    path("test_send_email/", views.test_send_email),
+
 ]
 
 if settings.DEBUG:

@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "djoser",
     "mail_templated",
+    'django_celery_beat'
 ]
 
 
@@ -211,7 +212,6 @@ COMPRESS_ENABLED = True
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.BasicAuthentication",
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
@@ -227,3 +227,8 @@ EMAIL_HOST = "smtp4dev"
 EMAIL_PORT = 25
 EMAIL_HOST_USER = ""
 EMAIL_HOST_PASSWORD = ""
+
+
+# celery config
+CELERY_BROKER_URL = "redis://redis:6379/1"
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
