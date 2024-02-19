@@ -1,0 +1,21 @@
+# cache page for APIView
+class MyView(APIView):
+    # Cache page for the requested url
+    @method_decorator(cache_page(60 * 60))
+    def get(self, request, format=None):
+        ...
+
+# cache page for ViewSets
+class MyViewSet(viewsets.ModelViewSet):
+    ...
+
+    @method_decorator(cache_page(60 * 60))
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+
+# or
+class MyViewSet(viewsets.ViewSet):
+    @method_decorator(cache_page(60 * 60))
+    def list(self, request, format=None):
+        ...
